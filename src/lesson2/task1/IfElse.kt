@@ -140,7 +140,7 @@ fun rookOrBishopThreatens(
     if (((kingX - kingY) % 2 != 0) && (bishopX - bishopY) % 2 != 0)
         counter += 2
     if (((kingX - kingY) % 2 == 0) && (bishopX - bishopY) % 2 == 0)
-        counter++
+        counter += 2
     return counter
 }
 
