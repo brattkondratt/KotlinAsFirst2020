@@ -92,7 +92,7 @@ fun angleInRadian(deg: Int, min: Int, sec: Int) = ((deg * 3600 + min * 60 + sec)
  * Найти длину отрезка, соединяющего точки на плоскости с координатами (x1, y1) и (x2, y2).
  * Например, расстояние между (3, 0) и (0, 4) равно 5
  */
-fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double) = sqrt((x1 - x2).pow(2)+ (y2 - y1).pow(2))
+fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double) = sqrt((x1 - x2).pow(2) + (y2 - y1).pow(2))
 
 /**
  * Простая (2 балла)
@@ -110,7 +110,8 @@ fun thirdDigit(number: Int) = (number / 100) % 10
  * прибыл на станцию назначения в h2 часов m2 минут того же дня (например в 13:01).
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
-fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int) = ((hoursArrive - hoursDepart - 1) * 60) + ((60 + minutesArrive) - minutesDepart)
+fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int) =
+    (hoursArrive - hoursDepart - 1) * 60 + 60 + minutesArrive - minutesDepart
 
 
 /**
@@ -129,9 +130,9 @@ fun accountInThreeYears(initial: Int, percent: Int) = initial * (1 + percent / 1
  * Пользователь задает целое трехзначное число (например, 478).
  * Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
-fun numberRevert(number: Int): Int{
+fun numberRevert(number: Int): Int {
     val first: Int = number % 10
     val second: Int = (number / 10) % 10
     val third: Int = (number / 100) % 10
-    return  first * 100 + second * 10 + third
+    return first * 100 + second * 10 + third
 }
