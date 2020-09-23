@@ -31,9 +31,7 @@ fun isNumberHappy(number: Int): Boolean =
  * Определить, угрожают ли они друг другу. Вернуть true, если угрожают.
  * Считать, что ферзи не могут загораживать друг друга.
  */
-fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
-    ((x1 == x2) || (y1 == y2) || (abs(x1 - x2) % 2 == 0 && (abs(y2 - y1) % 2 == 0)
-            || (abs(x1 - x2) % 2 != 0 && (abs(y2 - y1) % 2 != 0))))
+fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
 
 
 /**
@@ -44,20 +42,14 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
  */
 
 fun daysInMonth(month: Int, year: Int): Int {
-    if ((year % 4 == 0) && (year % 100 != 0) || ((year % 100 == 0) && (year % 400 == 0) && (year % 4 == 0)))
-        return when (month) {
-            4, 6, 9, 11 -> 30
-            1, 3, 5, 7, 8, 10, 12 -> 31
-            2 -> 29
-            else -> -1
-        }
-    else
-        return when (month) {
-            4, 6, 9, 11 -> 30
-            1, 3, 5, 7, 8, 10, 12 -> 31
-            2 -> 28
-            else -> -1
-        }
+    if ((year % 4 == 0 && year % 100 != 0 && month === 2) ||
+        (year % 100 == 0 && year % 400 == 0 && year % 4 == 0 && month === 2))
+    return 29
+    return when (month) {
+        4, 6, 9, 11 -> 30
+        1, 3, 5, 7, 8, 10, 12 -> 31
+        else -> 28
+    }
 }
 
 /**
@@ -70,7 +62,7 @@ fun daysInMonth(month: Int, year: Int): Int {
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
-): Boolean = (sqrt(sqr(x2 - x1) + sqr(y2 - y1)) <= r2 - r1)
+): Boolean = sqrt(sqr(x2 - x1) + sqr(y2 - y1)) <= r2 - r1
 
 
 /**
@@ -83,5 +75,5 @@ fun circleInside(
  * Вернуть true, если кирпич пройдёт
  */
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean =
-    (((s >= a) && (r >= b)) || ((s >= a) && (r >= c)) || ((s >= b) && (r >= a))
-            || ((s >= b) && (r >= c)) || ((s >= c) && (r >= a)) || ((s >= c) && (r >= b)))
+    (s >= a && r >= b) || (s >= a && r >= c) || (s >= b && r >= a)
+            || (s >= b) && (r >= c) || (s >= c && r >= a) || (s >= c && r >= b)

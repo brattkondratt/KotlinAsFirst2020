@@ -70,13 +70,11 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
 fun ageDescription(age: Int): String {
-    return if (((age % 100) >= 11) && ((age % 100) <= 20)) "$age лет"
-    else
-        return when (age % 10) {
+    if  (age % 100 in 11..20) return "$age лет"
+    return when (age % 10) {
             2, 3, 4 -> "$age года"
             0, 5, 6, 7, 8, 9 -> "$age лет"
-            1 -> "$age год"
-            else -> "Oh! It's not the correct age = $age"
+            else -> "$age год"
         }
 }
 
@@ -90,9 +88,9 @@ fun ageDescription(age: Int): String {
 fun timeForHalfWay(t1: Double, v1: Double, t2: Double, v2: Double, t3: Double, v3: Double): Double {
     val s = (t1 * v1 + t2 * v2 + t3 * v3) / 2
     return when {
-        (s <= (t1 * v1)) -> s / v1
-        ((s <= t1 * v1 + t2 * v2) && (s > t1 * v1)) -> (s - t1 * v1) / v2 + t1
-        ((s <= (t1 * v1 + t2 * v2 + t3 * v3)) && (s > t1 * v1 + t2 * v2)) -> (s - t1 * v1 - t2 * v2) / v3 + t1 + t2
+        s <= t1 * v1 -> s / v1
+        s <= t1 * v1 + t2 * v2 && s > t1 * v1 -> (s - t1 * v1) / v2 + t1
+        s <= t1 * v1 + t2 * v2 + t3 * v3 && s > t1 * v1 + t2 * v2 -> (s - t1 * v1 - t2 * v2) / v3 + t1 + t2
         else -> -1.0
     }
 }
@@ -154,19 +152,17 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    if ((a >= b + c) || (b >= a + c) || (c >= a + b)) return -1
-    else {
         val maxim = maxOf(a, b, c)
         val minim = minOf(a, b, c)
         val sred = a + b + c - maxim - minim
         return when {
+            minim + sred <= maxim -> -1
             sqr(minim) + sqr(sred) < sqr(maxim) -> 2
             sqr(minim) + sqr(sred) > sqr(maxim) -> 0
             else -> 1
         }
     }
 
-}
 
 /**
  * Средняя (3 балла)
@@ -177,9 +173,9 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    if ((a <= c) && (d >= b) && (c <= b)) return b - c
-    else if ((c <= a) && (d > a) && (d <= b)) return d - a
-    else if ((c <= a) && (d >= b) && (b > c)) return b - a
-    else if ((c >= a) && (c <= b) && (d <= b) && (d > a)) return d - c
+    if (a <= c && d >= b && c <= b) return b - c
+    else if (c <= a && d > a && d <= b) return d - a
+    else if (c <= a && d >= b && b > c) return b - a
+    else if (c >= a && c <= b && d <= b && d > a) return d - c
     else return -1
 }

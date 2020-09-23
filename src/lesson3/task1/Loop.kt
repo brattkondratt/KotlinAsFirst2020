@@ -90,22 +90,39 @@ fun digitNumber(n: Int): Int {
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO ()
+fun fib(n: Int): Int = TODO()
 
 /**
  * Простая (2 балла)
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int = TODO()
+fun minDivisor(n: Int): Int {
+    var ans = 0
+    for (i in 2..n) {
+        if (n % i == 0) {
+            ans = i
+            break
+        }
+    }
+    return ans
+}
 
 /**
  * Простая (2 балла)
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int = TODO()
-
+fun maxDivisor(n: Int): Int {
+    var ans = 0
+    for (i in n - 1 downTo 2) {
+        if (n % i == 0) {
+            ans = i
+            break
+        }
+    }
+    return ans
+}
 /**
  * Простая (2 балла)
  *
@@ -178,8 +195,18 @@ fun isPalindrome(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean = TODO()
-
+fun hasDifferentDigits(n: Int): Boolean {
+    var number = n
+    var x1 = number % 10
+    var x2 = 0
+    while (n > 0) {
+        number /= 10
+        x2 = number % 10
+        if (x1 != x2) return false
+        x2 = x1
+    }
+    return true
+}
 /**
  * Средняя (4 балла)
  *
