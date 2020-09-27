@@ -2,6 +2,8 @@
 
 package lesson3.task1
 
+import lesson1.task1.sqr
+import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
 // Урок 3: циклы
@@ -90,7 +92,19 @@ fun digitNumber(n: Int): Int {
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int {
+    var fib1 = 0
+    var fib2 = 1
+    var fibb = 1
+    if (n<3)
+        return fibb
+    for (i in 3..n){
+        fib1 = fib2
+        fib2 = fibb
+        fibb = fib1 + fib2
+    }
+    return fibb
+}
 
 /**
  * Простая (2 балла)
@@ -123,6 +137,7 @@ fun maxDivisor(n: Int): Int {
     }
     return ans
 }
+
 /**
  * Простая (2 балла)
  *
@@ -165,7 +180,14 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
  * то есть, существует ли такое целое k, что m <= k*k <= n.
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
-fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
+fun squareBetweenExists(m: Int, n: Int): Boolean {
+    var k: Double = 0.0
+    for (i in m..n) {
+        k = sqrt(i.toDouble())
+        if (i % k == 0.0) return true
+    }
+    return false
+}
 
 /**
  * Средняя (3 балла)
@@ -174,7 +196,15 @@ fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var ans = 0
+    var number = n
+    while (number > 0) {
+        ans = ans * 10 + (number % 10)
+        number /= 10
+    }
+    return ans
+}
 
 /**
  * Средняя (3 балла)
@@ -207,6 +237,7 @@ fun hasDifferentDigits(n: Int): Boolean {
     }
     return true
 }
+
 /**
  * Средняя (4 балла)
  *
@@ -249,4 +280,25 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var fib1 = 0
+    var fib2 = 0
+    var fibb = 1
+    var count = 1
+    var gg = 0
+    while (count < n) {
+        fib1 = fib2
+        fib2 = fibb
+        fibb = fib1 + fib2
+        count += digitNumber(fibb)
+    }
+    gg = count - n
+    var ans = 0
+    if (gg == 0) return fibb % 10
+    while (gg > 0) {
+        fibb /= 10
+        ans = fibb % 10
+        gg = gg - 1
+    }
+    return ans
+}
