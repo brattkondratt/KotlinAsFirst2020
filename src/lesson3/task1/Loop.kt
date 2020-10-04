@@ -79,7 +79,7 @@ fun digitNumber(n: Int): Int {
     var number = n
     if (number == 0)
         counter++
-    else while (number > 0) {
+    else while (number != 0) {
         number /= 10
         counter++
     }
@@ -96,9 +96,9 @@ fun fib(n: Int): Int {
     var fib1 = 0
     var fib2 = 1
     var fibb = 1
-    if (n<3)
+    if (n < 3)
         return fibb
-    for (i in 3..n){
+    for (i in 3..n) {
         fib1 = fib2
         fib2 = fibb
         fibb = fib1 + fib2
@@ -182,6 +182,8 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
     var k: Double = 0.0
+    if (m == 0 && n == 0)
+        return true
     for (i in m..n) {
         k = sqrt(i.toDouble())
         if (i % k == 0.0) return true
@@ -232,10 +234,10 @@ fun hasDifferentDigits(n: Int): Boolean {
     while (n > 0) {
         number /= 10
         x2 = number % 10
-        if (x1 != x2) return false
-        x2 = x1
+        if (x1 != x2) return true
+        else x2 = x1
     }
-    return true
+    return false
 }
 
 /**
@@ -269,7 +271,26 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var sqr = 1
+    var sqr2 = 0
+    var count = 0
+    var gg = 0
+    while (count < n) {
+        sqr2 = sqr * sqr
+        sqr += 1
+        count += digitNumber(sqr2)
+    }
+    gg = count - n
+    var ans = 0
+    if (gg == 0) return sqr2 % 10
+    while (gg > 0) {
+        sqr2 /= 10
+        ans = sqr2 % 10
+        gg = gg - 1
+    }
+    return ans
+}
 
 /**
  * Сложная (5 баллов)
