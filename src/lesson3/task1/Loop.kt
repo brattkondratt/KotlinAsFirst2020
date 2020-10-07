@@ -287,7 +287,7 @@ fun squareSequenceDigit(n: Int): Int {
     while (gg > 0) {
         sqr2 /= 10
         ans = sqr2 % 10
-        gg = gg - 1
+        gg -= 1
     }
     return ans
 }
@@ -319,7 +319,7 @@ fun fibSequenceDigit(n: Int): Int {
     while (gg > 0) {
         fibb /= 10
         ans = fibb % 10
-        gg = gg - 1
+        gg -= 1
     }
     return ans
 }
