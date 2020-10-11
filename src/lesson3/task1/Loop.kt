@@ -3,6 +3,7 @@
 package lesson3.task1
 
 import lesson1.task1.sqr
+import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
@@ -78,7 +79,7 @@ fun digitNumber(n: Int): Int {
     var counter = 0
     var number = n
     if (number == 0)
-        counter++
+        return 1
     else while (number != 0) {
         number /= 10
         counter++
@@ -93,13 +94,12 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
-    var fib1 = 0
     var fib2 = 1
     var fibb = 1
     if (n < 3)
         return fibb
     for (i in 3..n) {
-        fib1 = fib2
+        var fib1 = fib2
         fib2 = fibb
         fibb = fib1 + fib2
     }
@@ -111,16 +111,7 @@ fun fib(n: Int): Int {
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int {
-    var ans = 0
-    for (i in 2..n) {
-        if (n % i == 0) {
-            ans = i
-            break
-        }
-    }
-    return ans
-}
+fun minDivisor(n: Int): Int = TODO()
 
 /**
  * Простая (2 балла)
@@ -128,14 +119,7 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    var ans = 0
-    for (i in n - 1 downTo 2) {
-        if (n % i == 0) {
-            ans = i
-            break
-        }
-    }
-    return ans
+    return n / minDivisor(n)
 }
 
 /**
@@ -181,12 +165,10 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
-    var k: Double = 0.0
     if (m == 0 && n == 0)
         return true
     for (i in m..n) {
-        k = sqrt(i.toDouble())
-        if (i % k == 0.0) return true
+        if (i % sqrt(i.toDouble()) == 0.0) return true
     }
     return false
 }
@@ -229,13 +211,10 @@ fun isPalindrome(n: Int): Boolean = TODO()
  */
 fun hasDifferentDigits(n: Int): Boolean {
     var number = n
-    var x1 = number % 10
-    var x2 = 0
+    val x1 = number % 10
     while (n > 0) {
         number /= 10
-        x2 = number % 10
-        if (x1 != x2) return true
-        else x2 = x1
+        if (x1 != number % 10) return true
     }
     return false
 }
@@ -275,21 +254,12 @@ fun squareSequenceDigit(n: Int): Int {
     var sqr = 1
     var sqr2 = 0
     var count = 0
-    var gg = 0
     while (count < n) {
         sqr2 = sqr * sqr
         sqr += 1
         count += digitNumber(sqr2)
     }
-    gg = count - n
-    var ans = 0
-    if (gg == 0) return sqr2 % 10
-    while (gg > 0) {
-        sqr2 /= 10
-        ans = sqr2 % 10
-        gg -= 1
-    }
-    return ans
+    return sqr2 / 10.0.pow(count - n).toInt() % 10
 }
 
 /**
@@ -306,20 +276,11 @@ fun fibSequenceDigit(n: Int): Int {
     var fib2 = 0
     var fibb = 1
     var count = 1
-    var gg = 0
     while (count < n) {
         fib1 = fib2
         fib2 = fibb
         fibb = fib1 + fib2
         count += digitNumber(fibb)
     }
-    gg = count - n
-    var ans = 0
-    if (gg == 0) return fibb % 10
-    while (gg > 0) {
-        fibb /= 10
-        ans = fibb % 10
-        gg -= 1
-    }
-    return ans
+    return fibb / 10.0.pow(count - n).toInt() % 10
 }
