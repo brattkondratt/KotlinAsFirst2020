@@ -208,7 +208,13 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
  * Например:
  *   extractRepeats(listOf("a", "b", "a")) -> mapOf("a" to 2)
  */
-fun extractRepeats(list: List<String>): Map<String, Int> = TODO()
+fun extractRepeats(list: List<String>): Map<String, Int> {
+    val ans = mutableMapOf<String, Int>()
+    for (i in list) {
+        ans[i] = ans.getOrDefault(i, 0) + 1
+    }
+    return ans
+}
 
 /**
  * Средняя (3 балла)
@@ -247,7 +253,7 @@ fun hasAnagrams(words: List<String>): Boolean = TODO()
  *       "Sveta" to setOf("Marat"),
  *       "Mikhail" to setOf("Sveta"),
  *       "Friend" to setOf("GoodGnome"),
- *       "EvilGnome" to setOf()
+ *       "EvilGnome"  to setOf()
  *     )
  *   ) -> mapOf(
  *          "Marat" to setOf("Mikhail", "Sveta"),
@@ -277,7 +283,16 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
+    val num = mutableMapOf<Int, Int>()
+    for (i in list.indices) {
+        val temp = num[list[i]]
+        if (temp != null) return temp to i
+        num[number - list[i]] = i
+    }
+    return Pair(-1, -1)
+}
+
 
 /**
  * Очень сложная (8 баллов)

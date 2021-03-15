@@ -272,8 +272,8 @@ fun squareSequenceDigit(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun fibSequenceDigit(n: Int): Int {
-    var fib1 = 0
     var fib2 = 0
+    var fib1 = 0
     var fibb = 1
     var count = 1
     while (count < n) {
